@@ -1,0 +1,24 @@
+name: ServerLinksZ
+version: '1.0.0'
+main: org.strassburger.serverLinksZ.ServerLinksZ
+api-version: '1.21'
+authors: [ Kartoffelchipss ]
+description: A simple plugin to add Links to your server
+website: strassburger.org
+
+commands:
+  serverlinksz:
+    description: Main command for ServerLinksZ
+    aliases:
+      - sl
+      - serverlinks
+  link:
+    description: Get a link
+
+permissions:
+  serverlinksz.manage:
+    default: op
+    description: Allows the user to manage the links
+  serverlinksz.admin:
+    default: op
+    description: Allows the user to manage the plugin
