@@ -1,9 +1,0 @@
-org/strassburger/serverLinksZ/util/EventManager.class
-org/strassburger/serverLinksZ/commands/MainCommand.class
-org/strassburger/serverLinksZ/util/LinkManager.class
-org/strassburger/serverLinksZ/util/LanguageManager.class
-org/strassburger/serverLinksZ/util/MessageUtils.class
-org/strassburger/serverLinksZ/ServerLinksZ.class
-org/strassburger/serverLinksZ/util/CommandManager.class
-org/strassburger/serverLinksZ/commands/LinkCommand.class
-org/strassburger/serverLinksZ/util/MessageUtils$Replaceable.class
