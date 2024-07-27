@@ -37,20 +37,18 @@ public class LinkCommand implements CommandExecutor, TabCompleter {
             return false;
         }
 
-        String url = config.getString("links." + linkID + ".url");
-        String name = config.getString("links." + linkID + ".name");
-        boolean allowCommand = config.getBoolean("links." + linkID + ".allowCommand");
+        LinkManager.Link link = LinkManager.getLink(linkID);
 
-        if (url == null || name == null) return false;
+        if (link == null) return false;
 
-        if (!allowCommand) {
+        if (!link.allowCommand()) {
             sender.sendMessage(MessageUtils.getAndFormatMsg(false, "linkCcommandNotAllowed", "&cYou are not allowed to access this command via a link!"));
             return false;
         }
 
         sender.sendMessage(MessageUtils.getAndFormatMsg(false, "linkCommand", "&7-> <click:OPEN_URL:%url%><hover:show_text:'&7%url%'><u>%name%</u></hover></click> &r&7<-",
-                new MessageUtils.Replaceable("%url%", url),
-                new MessageUtils.Replaceable("%name%", name)
+                new MessageUtils.Replaceable("%url%", link.url()),
+                new MessageUtils.Replaceable("%name%", link.name())
         ));
         return false;
     }
@@ -61,9 +59,9 @@ public class LinkCommand implements CommandExecutor, TabCompleter {
     }
 
     @Override
-    public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
+    public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, String[] args) {
         if (args.length == 1) {
-            return LinkManager.getLinkKeys((key) -> ServerLinksZ.getInstance().getConfig().getBoolean("links." + key + ".allowCommand")).stream().toList();
+            return LinkManager.getLinkKeys(LinkManager.Link::allowCommand).stream().toList();
         }
         return null;
     }

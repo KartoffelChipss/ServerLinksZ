@@ -28,18 +28,4 @@ hints: true
 linkCommand: true
 
 
-# === LINKS ===
-
-links:
-  # You can add as many links as you want with the following schema
-  discord:
-    # The name of the link
-    name: "<#7289da>&lDiscord"
-    # The URL of the link
-    url: "https://strassburger.org/discord"
-    # Wether people should be able to see the link in /link
-    allowCommand: true
-  website:
-    name: "<#7cd770>&lWebsite"
-    url: "https://modrinth.com"
-    allowCommand: false
+# [!!!] You can configure the links in the links.yml file!
