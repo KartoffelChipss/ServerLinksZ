@@ -1,5 +1,5 @@
 prefix: "&7[<gradient:#00BFFF:#007BFF>&lServerLinksZ</gradient>&7]"
-help: "\n &8<b>></b> <#00BFFF><b><gradient:#00BFFF:#007BFF>ServerLinksZ</gradient></b></#00BFFF>\n\n&7You can add and remove ServerLinks using the <u>/sl</u> command, tho it is recommended to edit them in the config.yml file under <i>/plugins/ServerLinksZ/config.yml</i>.\n\n <click:OPEN_URL:https://strassburger.org/discord><#00BFFF><u><b>Support Discord</b></u></click>\n"
+help: "\n &8<b>></b> <#00BFFF><b><gradient:#00BFFF:#007BFF>ServerLinksZ</gradient></b></#00BFFF>\n\n&7Du kannst ServerLinks mit dem <u>/sl</u> Befehl hinzufügen oder entfernen, es ist allerdings empfohlen die links.yml Datei unter <i>/plugins/ServerLinksZ/links.yml</i> zu nutzen.\n\n <click:OPEN_URL:https://strassburger.org/discord><#00BFFF><u><b>Support Discord</b></u></click>\n"
 linkCommand: "&7-> <click:OPEN_URL:%url%><hover:show_text:'&7%url%'><u>%name%</u></hover></click> &r&7<-"
 rejoinHint: "<#E9D502>⚠ Um die Serverlinks zu aktualisieren, bitte den Server neu betreten!"
 moreConfigOptionsHint: "<#E9D502>⚠ Für mehr Konfigurationsoptionen, bitte die config.yml Datei benutzen!"
