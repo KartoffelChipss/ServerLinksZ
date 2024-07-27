@@ -32,6 +32,8 @@ linkCommand: true
 
 links:
   # You can add as many links as you want with the following schema
+  # Links with the following ids can be accessed directly via '/<linkId>':
+  # | discord | website | store | teamspeak | youtube | twitter | instagram | facebook | tiktok |
   discord:
     # The name of the link
     name: "<#7289da>&lDiscord"

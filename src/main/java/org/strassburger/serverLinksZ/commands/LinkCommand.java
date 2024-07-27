@@ -19,19 +19,21 @@ public class LinkCommand implements CommandExecutor, TabCompleter {
         final FileConfiguration config = ServerLinksZ.getInstance().getConfig();
 
         if (!ServerLinksZ.getInstance().getConfig().getBoolean("linkCommand")) {
-            sender.sendMessage(MessageUtils.getAndFormatMsg(false, "messages.linkCommandDisabled", "&cThe link command is disabled!"));
+            sender.sendMessage(MessageUtils.getAndFormatMsg(false, "linkCommandDisabled", "&cThe link command is disabled!"));
             return false;
         }
 
-        if (args.length == 0) {
-            throwUsageError(sender, "/link <name>");
+        List<String> linkCommands = List.of("discord", "website", "store", "teamspeak", "twitter", "youtube", "instagram", "facebook", "tiktok");
+
+        String linkID = linkCommands.contains(command.getName()) ? command.getName() : args.length > 0 ? args[0] : null;
+
+        if (linkID == null) {
+            throwUsageError(sender, "/" + command.getName() + " <id>");
             return false;
         }
-
-        String linkID = args[0];
 
         if (!LinkManager.getLinkKeys().contains(linkID)) {
-            throwUsageError(sender, "/link <name>");
+            sender.sendMessage(MessageUtils.getAndFormatMsg(false, "linkNotFound", "&cLink with id <#00BFFF>%id%&c not found!", new MessageUtils.Replaceable("%id%", linkID)));
             return false;
         }
 
@@ -39,7 +41,12 @@ public class LinkCommand implements CommandExecutor, TabCompleter {
         String name = config.getString("links." + linkID + ".name");
         boolean allowCommand = config.getBoolean("links." + linkID + ".allowCommand");
 
-        if (url == null || name == null || !allowCommand) return false;
+        if (url == null || name == null) return false;
+
+        if (!allowCommand) {
+            sender.sendMessage(MessageUtils.getAndFormatMsg(false, "linkCcommandNotAllowed", "&cYou are not allowed to access this command via a link!"));
+            return false;
+        }
 
         sender.sendMessage(MessageUtils.getAndFormatMsg(false, "linkCommand", "&7-> <click:OPEN_URL:%url%><hover:show_text:'&7%url%'><u>%name%</u></hover></click> &r&7<-",
                 new MessageUtils.Replaceable("%url%", url),
@@ -49,7 +56,7 @@ public class LinkCommand implements CommandExecutor, TabCompleter {
     }
 
     private void throwUsageError(CommandSender sender, String usage) {
-        Component msg = MessageUtils.getAndFormatMsg(false, "messages.usageError", "&cUsage: %usage%", new MessageUtils.Replaceable("%usage%", usage));
+        Component msg = MessageUtils.getAndFormatMsg(false, "usageError", "&cUsage: %usage%", new MessageUtils.Replaceable("%usage%", usage));
         sender.sendMessage(msg);
     }
 

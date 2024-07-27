@@ -5,11 +5,9 @@ import org.bukkit.ServerLinks;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.strassburger.serverLinksZ.ServerLinksZ;
-import org.strassburger.serverLinksZ.commands.LinkCommand;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -21,6 +19,9 @@ public class LinkManager {
 
     private LinkManager() {}
 
+    /**
+     * Updates the links
+     */
     public static void updateLinks() {
         final FileConfiguration config = ServerLinksZ.getInstance().getConfig();
         ConfigurationSection links = config.getConfigurationSection("links");
@@ -29,8 +30,6 @@ public class LinkManager {
 
         if (links != null) {
             for (String key : links.getKeys(false)) {
-                System.out.println("key: " + key);
-
                 String name = config.getString("links." + key + ".name");
                 String url = config.getString("links." + key + ".url");
 
@@ -39,6 +38,11 @@ public class LinkManager {
         }
     }
 
+    /**
+     * Registers a link
+     * @param name The name of the link
+     * @param url The URL of the link
+     */
     private static void registerLink(String name, String url) {
         try {
             URI uri = new URI(url);
@@ -49,6 +53,13 @@ public class LinkManager {
         }
     }
 
+    /**
+     * Adds a link
+     * @param key The key of the link
+     * @param name The name of the link
+     * @param url The URL of the link
+     * @param command Whether the link should allow commands
+     */
     public static void addLink(String key, String name, String url, boolean command) {
         final FileConfiguration config = ServerLinksZ.getInstance().getConfig();
         config.set("links." + key + ".name", name);
@@ -58,6 +69,10 @@ public class LinkManager {
         updateLinks();
     }
 
+    /**
+     * Removes a link
+     * @param key The key of the link
+     */
     public static void removeLink(String key) {
         final FileConfiguration config = ServerLinksZ.getInstance().getConfig();
         config.set("links." + key, null);
@@ -65,17 +80,29 @@ public class LinkManager {
         updateLinks();
     }
 
+    /**
+     * Clears all links from the server
+     */
     public static void clearLinks() {
         for (ServerLinks.ServerLink link : serverLinks.getLinks()) {
             serverLinks.removeLink(link);
         }
     }
 
+    /**
+     * Gets all link keys from the config
+     * @return All link keys
+     */
     public static Set<String> getLinkKeys() {
         final FileConfiguration config = ServerLinksZ.getInstance().getConfig();
         return config.getConfigurationSection("links").getKeys(false);
     }
 
+    /**
+     * Gets all link keys from the config that match the predicate
+     * @param predicate The predicate to match
+     * @return All link keys that match the predicate
+     */
     public static Set<String> getLinkKeys(Predicate<String> predicate) {
         return getLinkKeys().stream().filter(predicate).collect(Collectors.toSet());
     }

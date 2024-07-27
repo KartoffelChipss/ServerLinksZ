@@ -7,6 +7,8 @@ import org.strassburger.serverLinksZ.ServerLinksZ;
 import org.strassburger.serverLinksZ.commands.LinkCommand;
 import org.strassburger.serverLinksZ.commands.MainCommand;
 
+import java.util.List;
+
 public class CommandManager {
     private static final ServerLinksZ plugin = ServerLinksZ.getInstance();
 
@@ -18,6 +20,10 @@ public class CommandManager {
     public static void registerCommands() {
         registerCommand("serverlinksz", new MainCommand(), new MainCommand());
         registerCommand("link", new LinkCommand(), new LinkCommand());
+
+        for (String linkCommand : List.of("discord", "website", "store", "teamspeak", "twitter", "youtube", "instagram", "facebook", "tiktok")) {
+            registerCommand(linkCommand, new LinkCommand(), new LinkCommand());
+        }
     }
 
     /**

@@ -49,7 +49,7 @@ public class MainCommand implements CommandExecutor, TabCompleter {
         }
 
         if (optionOne.equals("add")) {
-            if (!sender.hasPermission("serverlinksz.manage")) {
+            if (!sender.hasPermission("serverlinksz.admin")) {
                 throwPermissionError(sender);
                 return false;
             }
@@ -83,7 +83,7 @@ public class MainCommand implements CommandExecutor, TabCompleter {
         }
 
         if (optionOne.equals("remove")) {
-            if (!sender.hasPermission("serverlinksz.manage")) {
+            if (!sender.hasPermission("serverlinksz.admin")) {
                 throwPermissionError(sender);
                 return false;
             }
@@ -126,11 +126,9 @@ public class MainCommand implements CommandExecutor, TabCompleter {
     public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, String[] args) {
         if (args.length == 1) {
             List<String> availableOptions = new ArrayList<>(List.of("help"));
-            if (sender.hasPermission("serverlinksz.manage")) {
+            if (sender.hasPermission("serverlinksz.admin")) {
                 availableOptions.add("add");
                 availableOptions.add("remove");
-            }
-            if (sender.hasPermission("serverlinksz.admin")) {
                 availableOptions.add("reload");
             }
             return availableOptions;
