@@ -15,7 +15,7 @@ import java.util.List;
 
 public class LinkCommand implements CommandExecutor, TabCompleter {
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         final FileConfiguration config = ServerLinksZ.getInstance().getConfig();
 
         if (!ServerLinksZ.getInstance().getConfig().getBoolean("linkCommand")) {
