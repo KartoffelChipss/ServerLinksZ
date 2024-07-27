@@ -1,10 +1,7 @@
 package org.strassburger.serverLinksZ;
 
 import org.bukkit.plugin.java.JavaPlugin;
-import org.strassburger.serverLinksZ.util.CommandManager;
-import org.strassburger.serverLinksZ.util.EventManager;
-import org.strassburger.serverLinksZ.util.LanguageManager;
-import org.strassburger.serverLinksZ.util.LinkManager;
+import org.strassburger.serverLinksZ.util.*;
 
 public final class ServerLinksZ extends JavaPlugin {
     private static ServerLinksZ instance;
@@ -24,6 +21,8 @@ public final class ServerLinksZ extends JavaPlugin {
         CommandManager.registerCommands();
 
         LinkManager.updateLinks();
+
+        new Metrics(this, 22795);
 
         getLogger().info("ServerLinksZ has been enabled!");
     }
