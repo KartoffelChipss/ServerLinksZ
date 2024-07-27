@@ -20,10 +20,16 @@ public class LanguageManager {
         loadLanguageConfig();
     }
 
+    /**
+     * Reloads the language configuration
+     */
     public void reload() {
         loadLanguageConfig();
     }
 
+    /**
+     * Loads the language configuration
+     */
     private void loadLanguageConfig() {
         File languageDirectory = new File(plugin.getDataFolder(), "lang/");
         if (!languageDirectory.exists() || !languageDirectory.isDirectory()) languageDirectory.mkdir();
@@ -48,10 +54,21 @@ public class LanguageManager {
         langConfig = YamlConfiguration.loadConfiguration(selectedLangFile);
     }
 
+    /**
+     * Returns a string from the language file
+     * @param key The key of the string
+     * @return The string
+     */
     public String getString(String key) {
         return langConfig.getString(key);
     }
 
+    /**
+     * Returns a string from the language file
+     * @param key The key of the string
+     * @param fallback The fallback string
+     * @return The string
+     */
     public String getString(String key, String fallback) {
         return langConfig.getString(key) != null ? langConfig.getString(key) : fallback;
     }
