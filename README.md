@@ -19,8 +19,7 @@ ServerLinksZ is a simple plugin, that allows you to add Links to the "Server Lin
 
 ## Permissions
 
-- **serverlinksz.manage** - Allows a user to manage links (default: op)
-- **serverlinksz.admin** - Allows a user to do admin tasks (default: op)
+- **serverlinksz.admin** - Allows a user to manage links and do admin tasks (default: op)
 
 ## Config
 
@@ -57,23 +56,6 @@ hints: true
 
 # Add a /link command to view the links
 linkCommand: true
-
-
-# === LINKS ===
-
-links:
-  # You can add as many links as you want with the following schema
-  discord:
-    # The name of the link
-    name: "<#7289da>&lDiscord"
-    # The URL of the link
-    url: "https://strassburger.org/discord"
-    # Wether people should be able to see the link in /link
-    allowCommand: true
-  website:
-    name: "<#7cd770>&lWebsite"
-    url: "https://modrinth.com"
-    allowCommand: false
 ```
 </details>
 
