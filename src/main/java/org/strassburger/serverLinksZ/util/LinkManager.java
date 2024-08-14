@@ -41,7 +41,7 @@ public class LinkManager {
     }
 
     /**
-     * Registers a link
+     * Registers a link (does not update the config)
      * @param name The name of the link
      * @param url The URL of the link
      */
@@ -56,7 +56,7 @@ public class LinkManager {
     }
 
     /**
-     * Adds a link
+     * Adds a link to the config and updates the links
      * @param key The key of the link
      * @param name The name of the link
      * @param url The URL of the link
@@ -72,7 +72,7 @@ public class LinkManager {
     }
 
     /**
-     * Removes a link
+     * Removes a link from the config and updates the links
      * @param key The key of the link
      */
     public static void removeLink(String key) {
