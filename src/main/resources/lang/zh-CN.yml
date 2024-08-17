@@ -1,6 +1,6 @@
 prefix: "&7[<gradient:#00BFFF:#007BFF>&lServerLinksZ</gradient>&7]"
 help: "\n &8<b>></b> <#00BFFF><b><gradient:#00BFFF:#007BFF>ServerLinksZ</gradient></b></#00BFFF>\n\n&7您可以使用 <u>/sl</u> 命令添加或移除服务器链接, 但建议对links.yml文件进行编辑 ,文件位于 <i>/plugins/ServerLinksZ/links.yml</i> 下.\n\n <click:OPEN_URL:https://strassburger.org/discord><#00BFFF><u><b>Support Discord</b></u></click>\n"
-linkCommand: "&7-> <click:OPEN_URL:%url%><hover:show_text:'&7%url%'><u>%name%</u></hover></click> &r&7<-"
+linkCommand: "&7-> <click:OPEN_URL:'%url%'><hover:show_text:'&7%url%'><u>%name%</u></hover></click> &r&7<-"
 rejoinHint: "<#E9D502>⚠ 为了更新服务器链接列表，请您重新进入服务器"
 moreConfigOptionsHint: "<#E9D502>⚠ 有关更多配置选项，请参阅config.yml文件!"
 invalidUrlError: "&c无效的URL!"
