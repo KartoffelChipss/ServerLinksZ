@@ -17,6 +17,14 @@ ServerLinksZ is a simple plugin, that allows you to add Links to the "Server Lin
 - ✅ Easy setup
 - ✅ Multiple languages
 
+## Commands
+
+- **/sl help** - Open the help menu
+- **/sl add <id> <name> <url> <allowCommand?>** - Add a link to the Link page
+- **/sl remove <id>** - Remove the link with this id
+- **/sl reload** - Reload the plugin
+- **/link <id>** - Open a link with this id
+
 ## Permissions
 
 - **serverlinksz.admin** - Allows a user to manage links and do admin tasks (default: op)
@@ -64,3 +72,7 @@ linkCommand: true
 If you need help with the setup of the plugin, you can join my Discord:
 
 [![discord-plural](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/compact/social/discord-plural_vector.svg)](https://strassburger.org/discord)
+
+---
+
+[![Usage](https://bstats.org/signatures/bukkit/ServerLinksZ.svg)](https://bstats.org/plugin/bukkit/ServerLinksZ/22795)
