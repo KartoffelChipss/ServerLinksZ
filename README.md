@@ -12,7 +12,7 @@ ServerLinksZ is a simple plugin, that allows you to add Links to the "Server Lin
 - ✅ Custom links
 - ✅ Colored link Names
 - ✅ HEX Colors
-- ✅ Link commands (e.g. `/dsicord`, `/website`)
+- ✅ Link commands (e.g. `/discord`, `/website`)
 - ✅ Highly customizable
 - ✅ Easy setup
 - ✅ Multiple languages
