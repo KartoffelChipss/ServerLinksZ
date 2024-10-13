@@ -4,5 +4,5 @@ discord:
   allowCommand: true
 website:
   name: "<#7cd770>&lWebsite"
-  url: "https://modrinth.com"
+  url: "https://modrinth.com/plugin/serverlinksz"
   allowCommand: false
