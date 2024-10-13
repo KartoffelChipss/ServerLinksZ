@@ -1,7 +1,9 @@
-package org.strassburger.serverLinksZ;
+package org.strassburger.serverlinksz;
 
 import org.bukkit.plugin.java.JavaPlugin;
-import org.strassburger.serverLinksZ.util.*;
+import org.strassburger.serverlinksz.util.*;
+import org.strassburger.serverlinksz.util.bStats.CustomCharts;
+import org.strassburger.serverlinksz.util.bStats.Metrics;
 
 public final class ServerLinksZ extends JavaPlugin {
     private static ServerLinksZ instance;
@@ -22,7 +24,7 @@ public final class ServerLinksZ extends JavaPlugin {
 
         LinkManager.updateLinks();
 
-        new Metrics(this, 22795);
+        initializeBStats();
 
         getLogger().info("ServerLinksZ has been enabled!");
     }
@@ -38,5 +40,13 @@ public final class ServerLinksZ extends JavaPlugin {
 
     public LanguageManager getLanguageManager() {
         return languageManager;
+    }
+
+    private void initializeBStats() {
+        final int pluginId = 22795;
+        Metrics metrics = new Metrics(this, pluginId);
+
+        metrics.addCustomChart(CustomCharts.getLanguageChart(this));
+        metrics.addCustomChart(CustomCharts.getLinksChart(this));
     }
 }

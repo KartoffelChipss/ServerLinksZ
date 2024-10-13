@@ -1,4 +1,4 @@
-package org.strassburger.serverLinksZ.commands;
+package org.strassburger.serverlinksz.commands;
 
 import net.kyori.adventure.text.Component;
 import org.bukkit.command.Command;
@@ -7,9 +7,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.jetbrains.annotations.NotNull;
-import org.strassburger.serverLinksZ.ServerLinksZ;
-import org.strassburger.serverLinksZ.util.LinkManager;
-import org.strassburger.serverLinksZ.util.MessageUtils;
+import org.strassburger.serverlinksz.ServerLinksZ;
+import org.strassburger.serverlinksz.util.LinkManager;
+import org.strassburger.serverlinksz.util.MessageUtils;
 
 import java.util.List;
 

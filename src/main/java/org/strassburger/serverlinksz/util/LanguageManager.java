@@ -1,9 +1,9 @@
-package org.strassburger.serverLinksZ.util;
+package org.strassburger.serverlinksz.util;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.strassburger.serverLinksZ.ServerLinksZ;
+import org.strassburger.serverlinksz.ServerLinksZ;
 
 import java.io.File;
 import java.util.HashMap;

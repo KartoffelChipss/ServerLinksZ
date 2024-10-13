@@ -1,11 +1,10 @@
-package org.strassburger.serverLinksZ.util;
+package org.strassburger.serverlinksz.util;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ServerLinks;
-import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.strassburger.serverLinksZ.ServerLinksZ;
+import org.strassburger.serverlinksz.ServerLinksZ;
 
 import javax.annotation.Nullable;
 import java.io.File;

@@ -1,6 +1,6 @@
 name: ServerLinksZ
-version: '1.0.0'
-main: org.strassburger.serverLinksZ.ServerLinksZ
+version: '${project.version}'
+main: org.strassburger.serverlinksz.ServerLinksZ
 api-version: '1.21'
 authors: [ Kartoffelchipss ]
 description: A simple plugin to add Links to your server

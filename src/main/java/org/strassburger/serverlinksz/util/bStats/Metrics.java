@@ -12,7 +12,7 @@
  *
  * Violations will result in a ban of your plugin and account from bStats.
  */
-package org.strassburger.serverLinksZ.util;
+package org.strassburger.serverlinksz.util.bStats;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;

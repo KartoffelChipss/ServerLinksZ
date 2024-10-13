@@ -1,8 +1,8 @@
-package org.strassburger.serverLinksZ.util;
+package org.strassburger.serverlinksz.util;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
-import org.strassburger.serverLinksZ.ServerLinksZ;
+import org.strassburger.serverlinksz.ServerLinksZ;
 
 import java.util.HashMap;
 import java.util.Map;

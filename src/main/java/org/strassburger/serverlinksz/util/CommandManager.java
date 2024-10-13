@@ -1,11 +1,11 @@
-package org.strassburger.serverLinksZ.util;
+package org.strassburger.serverlinksz.util;
 
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.command.TabCompleter;
-import org.strassburger.serverLinksZ.ServerLinksZ;
-import org.strassburger.serverLinksZ.commands.LinkCommand;
-import org.strassburger.serverLinksZ.commands.MainCommand;
+import org.strassburger.serverlinksz.ServerLinksZ;
+import org.strassburger.serverlinksz.commands.LinkCommand;
+import org.strassburger.serverlinksz.commands.MainCommand;
 
 import java.util.List;
 

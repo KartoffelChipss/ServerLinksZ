@@ -1,7 +1,7 @@
-package org.strassburger.serverLinksZ.util;
+package org.strassburger.serverlinksz.util;
 
 import org.bukkit.event.Listener;
-import org.strassburger.serverLinksZ.ServerLinksZ;
+import org.strassburger.serverlinksz.ServerLinksZ;
 
 public class EventManager {
     private static final ServerLinksZ plugin = ServerLinksZ.getInstance();
