@@ -21,7 +21,7 @@ public class CommandManager {
         registerCommand("serverlinksz", new MainCommand(), new MainCommand());
         registerCommand("link", new LinkCommand(), new LinkCommand());
 
-        for (String linkCommand : List.of("discord", "website", "store", "teamspeak", "twitter", "youtube", "instagram", "facebook", "tiktok")) {
+        for (String linkCommand : List.of("discord", "website", "store", "teamspeak", "twitter", "youtube", "instagram", "facebook", "tiktok", "vote")) {
             registerCommand(linkCommand, new LinkCommand(), new LinkCommand());
         }
     }

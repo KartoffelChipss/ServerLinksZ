@@ -23,7 +23,7 @@ public class LinkCommand implements CommandExecutor, TabCompleter {
             return false;
         }
 
-        List<String> linkCommands = List.of("discord", "website", "store", "teamspeak", "twitter", "youtube", "instagram", "facebook", "tiktok");
+        List<String> linkCommands = List.of("discord", "website", "store", "teamspeak", "twitter", "youtube", "instagram", "facebook", "tiktok", "vote");
 
         String linkID = linkCommands.contains(command.getName()) ? command.getName() : args.length > 0 ? args[0] : null;
 
