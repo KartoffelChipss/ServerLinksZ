@@ -40,6 +40,8 @@ commands:
     description: Get the facebook link
   tiktok:
     description: Get the tiktok link
+  vote:
+    description: Get the vote link
 
 permissions:
   serverlinksz.admin:
