@@ -4,14 +4,16 @@ import org.bukkit.event.Listener;
 import org.strassburger.serverlinksz.ServerLinksZ;
 
 public class EventManager {
-    private static final ServerLinksZ plugin = ServerLinksZ.getInstance();
+    private final ServerLinksZ plugin;
 
-    private EventManager() {}
+    public EventManager(ServerLinksZ plugin) {
+        this.plugin = plugin;
+    }
 
     /**
      * Registers all listeners
      */
-    public static void registerListeners() {
+    public void registerListeners() {
     }
 
     /**
@@ -19,7 +21,7 @@ public class EventManager {
      *
      * @param listener The listener to register
      */
-    private static void registerListener(Listener listener) {
+    private void registerListener(Listener listener) {
         plugin.getServer().getPluginManager().registerEvents(listener, plugin);
     }
 }

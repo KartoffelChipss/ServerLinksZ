@@ -10,6 +10,7 @@ public final class ServerLinksZ extends JavaPlugin {
 
     private CommandManager commandManager;
     private LanguageManager languageManager;
+    private EventManager eventManager;
 
     @Override
     public void onEnable() {
@@ -20,7 +21,8 @@ public final class ServerLinksZ extends JavaPlugin {
 
         languageManager = new LanguageManager();
 
-        EventManager.registerListeners();
+        eventManager = new EventManager(this);
+        eventManager.registerListeners();
         commandManager = new CommandManager(this);
         commandManager.registerCommands();
 
