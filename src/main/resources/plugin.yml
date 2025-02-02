@@ -11,6 +11,7 @@ commands:
     description: Main command for ServerLinksZ
     aliases:
       - sl
+      - slz
       - serverlinks
   link:
     description: Get a link

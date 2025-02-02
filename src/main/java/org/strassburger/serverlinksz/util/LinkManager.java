@@ -2,14 +2,20 @@ package org.strassburger.serverlinksz.util;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ServerLinks;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.defaults.BukkitCommand;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.jetbrains.annotations.NotNull;
 import org.strassburger.serverlinksz.ServerLinksZ;
+import org.strassburger.serverlinksz.commands.LinkCommand;
 
 import javax.annotation.Nullable;
 import java.io.File;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -19,7 +25,27 @@ public class LinkManager {
     private static final ServerLinks serverLinks = Bukkit.getServer().getServerLinks();
     private static final Logger logger = ServerLinksZ.getInstance().getLogger();
 
-    public record Link(String id, String name, String url, boolean allowCommand) {}
+    public record Link(String id, String name, String url, boolean allowCommand) {
+        /**
+         * Get a BukkitCommand for a link
+         * @return The BukkitCommand
+         */
+        public @NotNull Command getCommand() {
+            LinkCommand executor = new LinkCommand();
+            return new BukkitCommand(id()) {
+                @Override
+                public boolean execute(@NotNull CommandSender sender, @NotNull String commandLabel, String[] args) {
+                    return executor.onCommand(sender, this, commandLabel, args);
+                }
+
+                @Override
+                public @NotNull List<String> tabComplete(@NotNull CommandSender sender, @NotNull String alias, String[] args) throws IllegalArgumentException {
+                    List<String> completions = executor.onTabComplete(sender, this, alias, args);
+                    return completions == null ? List.of() : completions;
+                }
+            };
+        }
+    }
 
     private LinkManager() {}
 

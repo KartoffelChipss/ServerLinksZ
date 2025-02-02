@@ -8,6 +8,7 @@ import org.strassburger.serverlinksz.util.bStats.Metrics;
 public final class ServerLinksZ extends JavaPlugin {
     private static ServerLinksZ instance;
 
+    private CommandManager commandManager;
     private LanguageManager languageManager;
 
     @Override
@@ -20,7 +21,8 @@ public final class ServerLinksZ extends JavaPlugin {
         languageManager = new LanguageManager();
 
         EventManager.registerListeners();
-        CommandManager.registerCommands();
+        commandManager = new CommandManager(this);
+        commandManager.registerCommands();
 
         LinkManager.updateLinks();
 
@@ -40,6 +42,10 @@ public final class ServerLinksZ extends JavaPlugin {
 
     public LanguageManager getLanguageManager() {
         return languageManager;
+    }
+
+    public CommandManager getCommandManager() {
+        return commandManager;
     }
 
     private void initializeBStats() {

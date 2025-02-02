@@ -18,14 +18,9 @@ public class LinkCommand implements CommandExecutor, TabCompleter {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         final FileConfiguration config = ServerLinksZ.getInstance().getConfig();
 
-        if (!ServerLinksZ.getInstance().getConfig().getBoolean("linkCommand")) {
-            sender.sendMessage(MessageUtils.getAndFormatMsg(false, "linkCommandDisabled", "&cThe link command is disabled!"));
-            return false;
-        }
-
         List<String> linkCommands = List.of("discord", "website", "store", "teamspeak", "twitter", "youtube", "instagram", "facebook", "tiktok", "vote");
 
-        String linkID = linkCommands.contains(command.getName()) ? command.getName() : args.length > 0 ? args[0] : null;
+        String linkID = linkCommands.contains(command.getName()) || LinkManager.getLinkKeys().contains(command.getName()) ? command.getName() : args.length > 0 ? args[0] : null;
 
         if (linkID == null) {
             throwUsageError(sender, "/" + command.getName() + " <id>");

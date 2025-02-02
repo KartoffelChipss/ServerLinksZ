@@ -23,7 +23,15 @@ public class MainCommand implements CommandExecutor, TabCompleter {
         boolean showHints = config.getBoolean("hints");
 
         if (args.length == 0) {
-            sender.sendMessage(MessageUtils.getAndFormatMsg(true, "messages.versionMsg", "FALLBACK&7You are using version %version%", new MessageUtils.Replaceable("%version%", ServerLinksZ.getInstance().getDescription().getVersion())));
+            sender.sendMessage(MessageUtils.getAndFormatMsg(
+                    true,
+                    "messages.versionMsg",
+                    "FALLBACK&7You are using version %version%",
+                    new MessageUtils.Replaceable(
+                            "%version%",
+                            ServerLinksZ.getInstance().getDescription().getVersion()
+                    )
+            ));
             return false;
         }
 
@@ -44,7 +52,16 @@ public class MainCommand implements CommandExecutor, TabCompleter {
             config = ServerLinksZ.getInstance().getConfig();
             ServerLinksZ.getInstance().getLanguageManager().reload();
             LinkManager.updateLinks();
-            sender.sendMessage(MessageUtils.getAndFormatMsg(true, "messages.reloadMsg", "&7Successfully reloaded the plugin!"));
+            sender.sendMessage(MessageUtils.getAndFormatMsg(
+                    true,
+                    "messages.reloadMsg",
+                    "&7Successfully reloaded the plugin!"
+            ));
+            if (showHints) sender.sendMessage(MessageUtils.getAndFormatMsg(
+                    false,
+                    "restartServerToRegisterCustomCommands",
+                    "<#E9D502>⚠ Please restart the server to register the custom commands!"
+            ));
             return false;
         }
 
