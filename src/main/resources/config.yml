@@ -19,7 +19,7 @@
 # Set the language to any code found in the "lang" folder (don't add the .yml extension)
 # You can add your own language files. Use https://github.com/KartoffelChipss/ServerLinksZ/tree/main/src/main/resources/lang/en-US.yml as a template
 # If you want to share your language file, either create a pull request on GitHub or use GitLocalize: https://gitlocalize.com/repo/9890
-#  | en-US | de-DE | zh-CN | ru-RU
+#  | en-US | de-DE | zh-CN | ru-RU | zh-TW
 lang: "en-US"
 
 # Wether to show hints when using commands
