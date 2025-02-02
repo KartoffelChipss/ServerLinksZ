@@ -25,7 +25,7 @@ public class MainCommand implements CommandExecutor, TabCompleter {
         if (args.length == 0) {
             sender.sendMessage(MessageUtils.getAndFormatMsg(
                     true,
-                    "messages.versionMsg",
+                    "versionMsg",
                     "FALLBACK&7You are using version %version%",
                     new MessageUtils.Replaceable(
                             "%version%",
@@ -38,7 +38,7 @@ public class MainCommand implements CommandExecutor, TabCompleter {
         String optionOne = args[0];
 
         if (optionOne.equals("help")) {
-            sender.sendMessage(MessageUtils.getAndFormatMsg(false, "messages.help", "&7HELP"));
+            sender.sendMessage(MessageUtils.getAndFormatMsg(false, "help", "&7HELP"));
             return false;
         }
 
@@ -54,7 +54,7 @@ public class MainCommand implements CommandExecutor, TabCompleter {
             LinkManager.updateLinks();
             sender.sendMessage(MessageUtils.getAndFormatMsg(
                     true,
-                    "messages.reloadMsg",
+                    "reloadMsg",
                     "&7Successfully reloaded the plugin!"
             ));
             if (showHints) sender.sendMessage(MessageUtils.getAndFormatMsg(
@@ -82,20 +82,20 @@ public class MainCommand implements CommandExecutor, TabCompleter {
             boolean allowCommand = args.length > 4 && args[4].equals("true");
 
             if (!isValidURL(url)) {
-                sender.sendMessage(MessageUtils.getAndFormatMsg(false, "messages.invalidUrlError", "&cThe URL is invalid!"));
+                sender.sendMessage(MessageUtils.getAndFormatMsg(false, "invalidUrlError", "&cThe URL is invalid!"));
                 return false;
             }
 
             if (!url.startsWith("http://") && !url.startsWith("https://")) {
-                sender.sendMessage(MessageUtils.getAndFormatMsg(false, "messages.urlProtocolError", "&cThe URL must start with 'http://' or 'https://'!"));
+                sender.sendMessage(MessageUtils.getAndFormatMsg(false, "urlProtocolError", "&cThe URL must start with 'http://' or 'https://'!"));
                 return false;
             }
 
             LinkManager.addLink(id, name, url, allowCommand);
-            sender.sendMessage(MessageUtils.getAndFormatMsg(true, "messages.addLinkMsg", "&7Successfully added link with id %id%!", new MessageUtils.Replaceable("%id%", id)));
+            sender.sendMessage(MessageUtils.getAndFormatMsg(true, "addLinkMsg", "&7Successfully added link with id %id%!", new MessageUtils.Replaceable("%id%", id)));
             if (showHints) {
-                sender.sendMessage(MessageUtils.getAndFormatMsg(false, "messages.rejoinHint", "<#E9D502>⚠ To update the Serverlinks, please rejoin the server!"));
-                sender.sendMessage(MessageUtils.getAndFormatMsg(false, "messages.moreConfigOptionsHint", "<#E9D502>⚠ For more configuration options, please refer to the config.yml file!"));
+                sender.sendMessage(MessageUtils.getAndFormatMsg(false, "rejoinHint", "<#E9D502>⚠ To update the Serverlinks, please rejoin the server!"));
+                sender.sendMessage(MessageUtils.getAndFormatMsg(false, "moreConfigOptionsHint", "<#E9D502>⚠ For more configuration options, please refer to the config.yml file!"));
             }
         }
 
@@ -113,20 +113,20 @@ public class MainCommand implements CommandExecutor, TabCompleter {
             String id = args[1];
 
             LinkManager.removeLink(id);
-            sender.sendMessage(MessageUtils.getAndFormatMsg(true, "messages.removeLinkMsg", "&7Successfully removed link with id %id%!", new MessageUtils.Replaceable("%id%", id)));
-            if (showHints) sender.sendMessage(MessageUtils.getAndFormatMsg(false, "messages.rejoinHint", "&cTo update the Serverlinks, please rejoin the server!"));
+            sender.sendMessage(MessageUtils.getAndFormatMsg(true, "removeLinkMsg", "&7Successfully removed link with id %id%!", new MessageUtils.Replaceable("%id%", id)));
+            if (showHints) sender.sendMessage(MessageUtils.getAndFormatMsg(false, "rejoinHint", "&cTo update the Serverlinks, please rejoin the server!"));
         }
 
         return false;
     }
 
     private void throwUsageError(CommandSender sender, String usage) {
-        Component msg = MessageUtils.getAndFormatMsg(false, "messages.usageError", "&cUsage: %usage%", new MessageUtils.Replaceable("%usage%", usage));
+        Component msg = MessageUtils.getAndFormatMsg(false, "usageError", "&cUsage: %usage%", new MessageUtils.Replaceable("%usage%", usage));
         sender.sendMessage(msg);
     }
 
     private void throwPermissionError(CommandSender sender) {
-        Component msg = MessageUtils.getAndFormatMsg(false, "messages.noPermissionError", "&cYou don't have permission to use this!");
+        Component msg = MessageUtils.getAndFormatMsg(false, "noPermissionError", "&cYou don't have permission to use this!");
         sender.sendMessage(msg);
     }
 
