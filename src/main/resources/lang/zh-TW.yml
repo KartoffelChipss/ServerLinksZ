@@ -4,7 +4,7 @@ linkCommand: "&7-> <click:OPEN_URL:'%url%'><hover:show_text:'&7%url%'><u>%name%<
 rejoinHint: "<#E9D502>⚠ 如要更新伺服器連結，請重新加入伺服器！"
 moreConfigOptionsHint: "<#E9D502>⚠ 如需更多設定選項，請參考 config.yml 檔案！"
 invalidUrlError: "&c網址無效！"
-urlProtocolError: "&c網址必須以 'http://' 或 'https://' 開頭！"
+urlProtocolError: "&c網址必須以「http://」或「https://」開頭！"
 versionMsg: "&7你目前使用的是版本 <#00BFFF>%version%&7"
 noPermissionError: "&c你沒有權限使用此功能！"
 addLinkMsg: "&7已成功新增 ID 為 <#00BFFF>%id%&7 的連結！"

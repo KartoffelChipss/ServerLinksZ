@@ -11,7 +11,7 @@ import java.util.List;
 
 public class LanguageManager {
     private final JavaPlugin plugin = ServerLinksZ.getInstance();
-    public static final List<String> defaultLangs = List.of("en-US", "de-DE", "zh-CN", "ru-RU");
+    public static final List<String> defaultLangs = List.of("en-US", "de-DE", "zh-CN", "ru-RU", "zh-TW");
 
     private HashMap<String, String> translationMap;
     private FileConfiguration langConfig;
