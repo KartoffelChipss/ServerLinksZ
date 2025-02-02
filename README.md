@@ -24,7 +24,9 @@ ServerLinksZ is a simple plugin, that allows you to add Links to the "Server Lin
 - **/sl add <id> <name> <url> <allowCommand?>** - Add a link to the Link page
 - **/sl remove <id>** - Remove the link with this id
 - **/sl reload** - Reload the plugin
-- **/link <id>** - Open a link with this id
+- **/link <id>** - Open a link with this id 
+
+and custom link commands (e.g. `/discord`, `/website`)
 
 ## Permissions
 
@@ -34,7 +36,7 @@ ServerLinksZ is a simple plugin, that allows you to add Links to the "Server Lin
 
 Here is an example of the configuration file:
 <details>
-<summary>Click me!</summary>
+<summary>config.yml</summary>
 
 ```yml
 #     _____                            _      _       _          ______
@@ -57,7 +59,8 @@ Here is an example of the configuration file:
 
 # Set the language to any code found in the "lang" folder (don't add the .yml extension)
 # You can add your own language files. Use https://github.com/KartoffelChipss/ServerLinksZ/tree/main/src/main/resources/lang/en-US.yml as a template
-#  | en-US | de-DE |
+# If you want to share your language file, either create a pull request on GitHub or use GitLocalize: https://gitlocalize.com/repo/9890
+#  | en-US | de-DE | zh-CN | ru-RU | zh-TW
 lang: "en-US"
 
 # Wether to show hints when using commands
@@ -65,6 +68,29 @@ hints: true
 
 # Add a /link command to view the links
 linkCommand: true
+
+# Instead of using the /link command, you can also use a custom command for any link (e.g. /mycoollink)
+# This feature is experimental and might not work as expected
+dynamicCommands: false
+
+# [!!!] You can configure the links in the links.yml file!
+```
+</details>
+
+And here an example of the links configuration file:
+
+<details>
+<summary>links.yml</summary>
+
+```yml
+discord:
+  name: "<#7289da>&lDiscord"
+  url: "https://strassburger.org/discord"
+  allowCommand: true
+website:
+  name: "<#7cd770>&lWebsite"
+  url: "https://modrinth.com/plugin/serverlinksz"
+  allowCommand: false
 ```
 </details>
 
