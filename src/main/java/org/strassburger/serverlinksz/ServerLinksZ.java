@@ -50,6 +50,10 @@ public final class ServerLinksZ extends JavaPlugin {
         return commandManager;
     }
 
+    public EventManager getEventManager() {
+        return eventManager;
+    }
+
     private void initializeBStats() {
         final int pluginId = 22795;
         Metrics metrics = new Metrics(this, pluginId);

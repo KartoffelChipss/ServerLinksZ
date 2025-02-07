@@ -4,7 +4,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.*;
 import org.strassburger.serverlinksz.ServerLinksZ;
 import org.strassburger.serverlinksz.commands.LinkCommand;
-import org.strassburger.serverlinksz.commands.MainCommand;
+import org.strassburger.serverlinksz.commands.maincommand.MainCommandHandler;
+import org.strassburger.serverlinksz.commands.maincommand.MainTabCompleter;
 
 import java.lang.reflect.Field;
 import java.util.List;
@@ -38,7 +39,7 @@ public class CommandManager {
      * Registers all commands
      */
     public void registerCommands() {
-        registerCommand("serverlinksz", new MainCommand(), new MainCommand());
+        registerCommand("serverlinksz", new MainCommandHandler(plugin), new MainTabCompleter());
 
         if (ServerLinksZ.getInstance().getConfig().getBoolean("linkCommand")) {
             registerCommand("link", new LinkCommand(), new LinkCommand());
@@ -73,6 +74,7 @@ public class CommandManager {
         if (command != null) {
             command.setExecutor(executor);
             command.setTabCompleter(tabCompleter);
+            command.permissionMessage(MessageUtils.getAndFormatMsg(false, "noPermissionError", "&cYou don't have permission to use this!"));
         }
     }
 }
