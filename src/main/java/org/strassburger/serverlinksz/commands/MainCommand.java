@@ -37,65 +37,64 @@ public class MainCommand implements CommandExecutor, TabCompleter {
 
         String optionOne = args[0];
 
-        if (optionOne.equals("help")) {
-            sender.sendMessage(MessageUtils.getAndFormatMsg(false, "help", "&7HELP"));
-            return false;
-        }
-
-        if (optionOne.equals("reload")) {
-            if (!sender.hasPermission("serverlinksz.admin")) {
-                throwPermissionError(sender);
+        switch (optionOne) {
+            case "help" -> {
+                sender.sendMessage(MessageUtils.getAndFormatMsg(false, "help", "&7HELP"));
                 return false;
             }
+            case "reload" -> {
+                if (!sender.hasPermission("serverlinksz.admin")) {
+                    throwPermissionError(sender);
+                    return false;
+                }
 
-            ServerLinksZ.getInstance().reloadConfig();
-            config = ServerLinksZ.getInstance().getConfig();
-            ServerLinksZ.getInstance().getLanguageManager().reload();
-            LinkManager.updateLinks();
-            sender.sendMessage(MessageUtils.getAndFormatMsg(
-                    true,
-                    "reloadMsg",
-                    "&7Successfully reloaded the plugin!"
-            ));
-            if (showHints) sender.sendMessage(MessageUtils.getAndFormatMsg(
-                    false,
-                    "restartServerToRegisterCustomCommands",
-                    "<#E9D502>⚠ Please restart the server to register the custom commands!"
-            ));
-            return false;
-        }
-
-        if (optionOne.equals("add")) {
-            if (!sender.hasPermission("serverlinksz.admin")) {
-                throwPermissionError(sender);
+                ServerLinksZ.getInstance().reloadConfig();
+                ServerLinksZ.getInstance().getLanguageManager().reload();
+                LinkManager.updateLinks();
+                sender.sendMessage(MessageUtils.getAndFormatMsg(
+                        true,
+                        "reloadMsg",
+                        "&7Successfully reloaded the plugin!"
+                ));
+                if (showHints) sender.sendMessage(MessageUtils.getAndFormatMsg(
+                        false,
+                        "restartServerToRegisterCustomCommands",
+                        "<#E9D502>⚠ Please restart the server to register the custom commands!"
+                ));
                 return false;
             }
+            case "add" -> {
+                if (!sender.hasPermission("serverlinksz.admin")) {
+                    throwPermissionError(sender);
+                    return false;
+                }
 
-            if (args.length < 4) {
-                throwUsageError(sender, "/serverlinksz add <id> <name> <url> <allowCommand>");
-                return false;
-            }
+                if (args.length < 4) {
+                    throwUsageError(sender, "/serverlinksz add <id> <name> <url> <allowCommand>");
+                    return false;
+                }
 
-            String id = args[1];
-            String name = args[2];
-            String url = args[3];
-            boolean allowCommand = args.length > 4 && args[4].equals("true");
+                String id = args[1];
+                String name = args[2];
+                String url = args[3];
+                boolean allowCommand = args.length > 4 && args[4].equals("true");
 
-            if (!isValidURL(url)) {
-                sender.sendMessage(MessageUtils.getAndFormatMsg(false, "invalidUrlError", "&cThe URL is invalid!"));
-                return false;
-            }
+                if (!isValidURL(url)) {
+                    sender.sendMessage(MessageUtils.getAndFormatMsg(false, "invalidUrlError", "&cThe URL is invalid!"));
+                    return false;
+                }
 
-            if (!url.startsWith("http://") && !url.startsWith("https://")) {
-                sender.sendMessage(MessageUtils.getAndFormatMsg(false, "urlProtocolError", "&cThe URL must start with 'http://' or 'https://'!"));
-                return false;
-            }
+                if (!url.startsWith("http://") && !url.startsWith("https://")) {
+                    sender.sendMessage(MessageUtils.getAndFormatMsg(false, "urlProtocolError", "&cThe URL must start with 'http://' or 'https://'!"));
+                    return false;
+                }
 
-            LinkManager.addLink(id, name, url, allowCommand);
-            sender.sendMessage(MessageUtils.getAndFormatMsg(true, "addLinkMsg", "&7Successfully added link with id %id%!", new MessageUtils.Replaceable("%id%", id)));
-            if (showHints) {
-                sender.sendMessage(MessageUtils.getAndFormatMsg(false, "rejoinHint", "<#E9D502>⚠ To update the Serverlinks, please rejoin the server!"));
-                sender.sendMessage(MessageUtils.getAndFormatMsg(false, "moreConfigOptionsHint", "<#E9D502>⚠ For more configuration options, please refer to the config.yml file!"));
+                LinkManager.addLink(id, name, url, allowCommand);
+                sender.sendMessage(MessageUtils.getAndFormatMsg(true, "addLinkMsg", "&7Successfully added link with id %id%!", new MessageUtils.Replaceable("%id%", id)));
+                if (showHints) {
+                    sender.sendMessage(MessageUtils.getAndFormatMsg(false, "rejoinHint", "<#E9D502>⚠ To update the Serverlinks, please rejoin the server!"));
+                    sender.sendMessage(MessageUtils.getAndFormatMsg(false, "moreConfigOptionsHint", "<#E9D502>⚠ For more configuration options, please refer to the config.yml file!"));
+                }
             }
         }
 
@@ -140,45 +139,58 @@ public class MainCommand implements CommandExecutor, TabCompleter {
     }
 
     @Override
-    public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, String[] args) {
-        if (args.length == 1) {
-            List<String> availableOptions = new ArrayList<>(List.of("help"));
-            if (sender.hasPermission("serverlinksz.admin")) {
-                availableOptions.add("add");
-                availableOptions.add("remove");
-                availableOptions.add("reload");
+    public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, String @NotNull [] args) {
+        switch (args.length) {
+            case 1 -> {
+                List<String> availableOptions = new ArrayList<>();
+                if ("help".startsWith(args[0].toLowerCase()) || args[0].equalsIgnoreCase("help"))
+                    availableOptions.add("help");
+                if (sender.hasPermission("serverlinksz.admin")) {
+                    List<String> adminCommands = List.of("add", "remove", "reload");
+                    for (String adminCommand : adminCommands) {
+                        if (adminCommand.startsWith(args[0].toLowerCase()) || args[0].equalsIgnoreCase(adminCommand)) {
+                            availableOptions.add(adminCommand);
+                        }
+                    }
+                }
+                return availableOptions;
             }
-            return availableOptions;
+
+            case 2 -> {
+                if (args[0].equals("add")) {
+                    return List.of("<id>");
+                }
+
+                if (args[0].equals("remove")) {
+                    List<String> linkKeys = LinkManager.getLinkKeys().stream().toList();
+                    List<String> suggestions = new ArrayList<>();
+                    for (String linkKey : linkKeys) {
+                        if (linkKey.startsWith(args[1].toLowerCase()) || args[1].equalsIgnoreCase(linkKey)) {
+                            suggestions.add(linkKey);
+                        }
+                    }
+                    return suggestions;
+                }
+            }
+
+            case 3 -> {
+                if (args[0].equals("add")) {
+                    return List.of("<name>");
+                }
+            }
+
+            case 4 -> {
+                if (args[0].equals("add")) {
+                    return List.of("<url>");
+                }
+            }
+
+            case 5 -> {
+                if (args[0].equals("add")) {
+                    return List.of("true", "false");
+                }
+            }
         }
-
-        if (args.length == 2) {
-            if (args[0].equals("add")) {
-                return List.of("<id>");
-            }
-
-            if (args[0].equals("remove")) {
-                return LinkManager.getLinkKeys().stream().toList();
-            }
-        }
-
-        if (args.length == 3) {
-            if (args[0].equals("add")) {
-                return List.of("<name>");
-            }
-        }
-
-        if (args.length == 4) {
-            if (args[0].equals("add")) {
-                return List.of("<url>");
-            }
-        }
-
-        if (args.length == 5) {
-            if (args[0].equals("add")) {
-                return List.of("true", "false");
-            }
-        }
-
-        return null;
+        return List.of();
     }
 }
