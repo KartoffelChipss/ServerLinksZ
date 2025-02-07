@@ -42,12 +42,16 @@ public class LanguageManager {
             }
         }
 
-        String langOption = plugin.getConfig().getString("lang") != null ? plugin.getConfig().getString("lang") : "en-US";
+        String langOption = plugin.getConfig().getString("lang") != null
+                ? plugin.getConfig().getString("lang")
+                : "en-US";
         File selectedLangFile = new File(languageDirectory, langOption + ".yml");
 
         if (!selectedLangFile.exists()) {
             selectedLangFile = new File(languageDirectory, "en-US.yml");
-            plugin.getLogger().warning("Language file " + langOption + ".yml (" + selectedLangFile.getPath() + ") not found! Using fallback en-US.yml.");
+            plugin.getLogger().warning(
+                    "Language file " + langOption + ".yml (" + selectedLangFile.getPath() + ") not found! Using fallback en-US.yml."
+            );
         }
 
         plugin.getLogger().info("Using language file: " + selectedLangFile.getPath());

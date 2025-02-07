@@ -74,7 +74,11 @@ public class CommandManager {
         if (command != null) {
             command.setExecutor(executor);
             command.setTabCompleter(tabCompleter);
-            command.permissionMessage(MessageUtils.getAndFormatMsg(false, "noPermissionError", "&cYou don't have permission to use this!"));
+            command.permissionMessage(MessageUtils.getAndFormatMsg(
+                    false,
+                    "noPermissionError",
+                    "&cYou don't have permission to use this!"
+            ));
         }
     }
 }
