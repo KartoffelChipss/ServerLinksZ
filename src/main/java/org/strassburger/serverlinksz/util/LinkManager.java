@@ -22,37 +22,20 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 public class LinkManager {
-    private static final ServerLinks serverLinks = Bukkit.getServer().getServerLinks();
-    private static final Logger logger = ServerLinksZ.getInstance().getLogger();
+    private final ServerLinksZ plugin;
 
-    public record Link(String id, String name, String url, boolean allowCommand) {
-        /**
-         * Get a BukkitCommand for a link
-         * @return The BukkitCommand
-         */
-        public @NotNull Command getCommand() {
-            LinkCommand executor = new LinkCommand();
-            return new BukkitCommand(id()) {
-                @Override
-                public boolean execute(@NotNull CommandSender sender, @NotNull String commandLabel, String[] args) {
-                    return executor.onCommand(sender, this, commandLabel, args);
-                }
+    private final ServerLinks serverLinks = Bukkit.getServer().getServerLinks();
+    private final Logger logger;
 
-                @Override
-                public @NotNull List<String> tabComplete(@NotNull CommandSender sender, @NotNull String alias, String[] args) throws IllegalArgumentException {
-                    List<String> completions = executor.onTabComplete(sender, this, alias, args);
-                    return completions == null ? List.of() : completions;
-                }
-            };
-        }
+    public LinkManager(ServerLinksZ plugin) {
+        this.plugin = plugin;
+        this.logger = plugin.getLogger();
     }
-
-    private LinkManager() {}
 
     /**
      * Updates the links
      */
-    public static void updateLinks() {
+    public void updateLinks() {
         final FileConfiguration config = getLinksConfig();
 
         clearLinks();
@@ -70,7 +53,7 @@ public class LinkManager {
      * @param name The name of the link
      * @param url The URL of the link
      */
-    private static void registerLink(String name, String url) {
+    private void registerLink(String name, String url) {
         try {
             URI uri = new URI(url);
             serverLinks.addLink(MessageUtils.formatMsg(name), uri);
@@ -87,7 +70,7 @@ public class LinkManager {
      * @param url The URL of the link
      * @param command Whether the link should allow commands
      */
-    public static void addLink(String key, String name, String url, boolean command) {
+    public void addLink(String key, String name, String url, boolean command) {
         final FileConfiguration config = getLinksConfig();
         config.set(key + ".name", name);
         config.set(key + ".url", url);
@@ -100,7 +83,7 @@ public class LinkManager {
      * Removes a link from the config and updates the links
      * @param key The key of the link
      */
-    public static void removeLink(String key) {
+    public void removeLink(String key) {
         final FileConfiguration config = getLinksConfig();
         config.set(key, null);
         saveLinksConfig(config);
@@ -110,7 +93,7 @@ public class LinkManager {
     /**
      * Clears all links from the server
      */
-    public static void clearLinks() {
+    public void clearLinks() {
         for (ServerLinks.ServerLink link : serverLinks.getLinks()) {
             serverLinks.removeLink(link);
         }
@@ -122,20 +105,20 @@ public class LinkManager {
      * @return The link
      */
     @Nullable
-    public static Link getLink(String key) {
+    public Link getLink(String key) {
         final FileConfiguration config = getLinksConfig();
         String name = config.getString(key + ".name");
         String url = config.getString(key + ".url");
         boolean allowCommand = config.getBoolean(key + ".allowCommand");
         if (name == null || url == null) return null;
-        return new Link(key, name, url, allowCommand);
+        return new Link(key, name, url, allowCommand, plugin);
     }
 
     /**
      * Gets all link keys from the config
      * @return All link keys
      */
-    public static Set<String> getLinkKeys() {
+    public Set<String> getLinkKeys() {
         return getLinksConfig().getKeys(false);
     }
 
@@ -144,7 +127,7 @@ public class LinkManager {
      * @param predicate The predicate to match
      * @return All link keys that match the predicate
      */
-    public static Set<String> getLinkKeys(Predicate<Link> predicate) {
+    public Set<String> getLinkKeys(Predicate<Link> predicate) {
         return getLinkKeys().stream().filter(
                 key -> {
                     Link link = getLink(key);
@@ -153,22 +136,44 @@ public class LinkManager {
         ).collect(Collectors.toSet());
     }
 
-    private static FileConfiguration getLinksConfig() {
-        File linksFile = new File(ServerLinksZ.getInstance().getDataFolder(), "links.yml");
+    private FileConfiguration getLinksConfig() {
+        File linksFile = new File(plugin.getDataFolder(), "links.yml");
         if (!linksFile.exists()) {
             linksFile.getParentFile().mkdirs();
-            ServerLinksZ.getInstance().saveResource("links.yml", false);
+            plugin.saveResource("links.yml", false);
         }
         return YamlConfiguration.loadConfiguration(linksFile);
     }
 
-    private static void saveLinksConfig(FileConfiguration config) {
-        File linksFile = new File(ServerLinksZ.getInstance().getDataFolder(), "links.yml");
+    private void saveLinksConfig(FileConfiguration config) {
+        File linksFile = new File(plugin.getDataFolder(), "links.yml");
         try {
             config.save(linksFile);
         } catch (Exception e) {
             logger.severe("Failed to save links.yml!");
             e.printStackTrace();
+        }
+    }
+
+    public record Link(String id, String name, String url, boolean allowCommand, ServerLinksZ plugin) {
+        /**
+         * Get a BukkitCommand for a link
+         * @return The BukkitCommand
+         */
+        public @NotNull Command getCommand() {
+            LinkCommand executor = new LinkCommand(plugin);
+            return new BukkitCommand(id()) {
+                @Override
+                public boolean execute(@NotNull CommandSender sender, @NotNull String commandLabel, String[] args) {
+                    return executor.onCommand(sender, this, commandLabel, args);
+                }
+
+                @Override
+                public @NotNull List<String> tabComplete(@NotNull CommandSender sender, @NotNull String alias, String[] args) throws IllegalArgumentException {
+                    List<String> completions = executor.onTabComplete(sender, this, alias, args);
+                    return completions == null ? List.of() : completions;
+                }
+            };
         }
     }
 }

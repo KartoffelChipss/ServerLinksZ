@@ -6,27 +6,25 @@ import org.strassburger.serverlinksz.util.bStats.CustomCharts;
 import org.strassburger.serverlinksz.util.bStats.Metrics;
 
 public final class ServerLinksZ extends JavaPlugin {
-    private static ServerLinksZ instance;
-
     private CommandManager commandManager;
     private LanguageManager languageManager;
     private EventManager eventManager;
+    private LinkManager linkManager;
 
     @Override
     public void onEnable() {
-        instance = this;
-
         getConfig().options().copyDefaults(true);
         saveDefaultConfig();
 
-        languageManager = new LanguageManager();
+        languageManager = new LanguageManager(this);
+
+        linkManager = new LinkManager(this);
+        linkManager.updateLinks();
 
         eventManager = new EventManager(this);
         eventManager.registerListeners();
         commandManager = new CommandManager(this);
         commandManager.registerCommands();
-
-        LinkManager.updateLinks();
 
         initializeBStats();
 
@@ -39,7 +37,7 @@ public final class ServerLinksZ extends JavaPlugin {
     }
 
     public static ServerLinksZ getInstance() {
-        return instance;
+        return JavaPlugin.getPlugin(ServerLinksZ.class);
     }
 
     public LanguageManager getLanguageManager() {
@@ -52,6 +50,10 @@ public final class ServerLinksZ extends JavaPlugin {
 
     public EventManager getEventManager() {
         return eventManager;
+    }
+
+    public LinkManager getLinkManager() {
+        return linkManager;
     }
 
     private void initializeBStats() {

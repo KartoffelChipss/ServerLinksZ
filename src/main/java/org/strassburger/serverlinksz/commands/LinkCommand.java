@@ -5,19 +5,26 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.jetbrains.annotations.NotNull;
+import org.strassburger.serverlinksz.ServerLinksZ;
 import org.strassburger.serverlinksz.util.LinkManager;
 import org.strassburger.serverlinksz.util.MessageUtils;
 
 import java.util.List;
 
 public class LinkCommand implements CommandExecutor, TabCompleter {
+    private final ServerLinksZ plugin;
+
+    public LinkCommand(ServerLinksZ plugin) {
+        this.plugin = plugin;
+    }
+
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         List<String> linkCommands = List.of(
                 "discord", "website", "store", "teamspeak", "twitter", "youtube", "instagram", "facebook", "tiktok", "vote"
         );
 
-        String linkID = linkCommands.contains(command.getName()) | LinkManager.getLinkKeys().contains(command.getName())
+        String linkID = linkCommands.contains(command.getName()) | plugin.getLinkManager().getLinkKeys().contains(command.getName())
                 ? command.getName()
                 : args.length > 0
                 ? args[0]
@@ -28,7 +35,7 @@ public class LinkCommand implements CommandExecutor, TabCompleter {
             return false;
         }
 
-        if (!LinkManager.getLinkKeys().contains(linkID)) {
+        if (!plugin.getLinkManager().getLinkKeys().contains(linkID)) {
             sender.sendMessage(MessageUtils.getAndFormatMsg(
                     false,
                     "linkNotFound",
@@ -38,7 +45,7 @@ public class LinkCommand implements CommandExecutor, TabCompleter {
             return false;
         }
 
-        LinkManager.Link link = LinkManager.getLink(linkID);
+        LinkManager.Link link = plugin.getLinkManager().getLink(linkID);
 
         if (link == null) return false;
 
@@ -64,7 +71,7 @@ public class LinkCommand implements CommandExecutor, TabCompleter {
     @Override
     public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, String[] args) {
         if (args.length == 1) {
-            return LinkManager.getLinkKeys(LinkManager.Link::allowCommand).stream().toList();
+            return plugin.getLinkManager().getLinkKeys(LinkManager.Link::allowCommand).stream().toList();
         }
         return null;
     }

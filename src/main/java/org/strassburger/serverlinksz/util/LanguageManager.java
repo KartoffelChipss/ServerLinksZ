@@ -2,7 +2,6 @@ package org.strassburger.serverlinksz.util;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.plugin.java.JavaPlugin;
 import org.strassburger.serverlinksz.ServerLinksZ;
 
 import java.io.File;
@@ -10,13 +9,14 @@ import java.util.HashMap;
 import java.util.List;
 
 public class LanguageManager {
-    private final JavaPlugin plugin = ServerLinksZ.getInstance();
+    private final ServerLinksZ plugin;
     public static final List<String> defaultLangs = List.of("en-US", "de-DE", "zh-CN", "ru-RU", "zh-TW");
 
     private HashMap<String, String> translationMap;
     private FileConfiguration langConfig;
 
-    public LanguageManager() {
+    public LanguageManager(ServerLinksZ plugin) {
+        this.plugin = plugin;
         loadLanguageConfig();
     }
 

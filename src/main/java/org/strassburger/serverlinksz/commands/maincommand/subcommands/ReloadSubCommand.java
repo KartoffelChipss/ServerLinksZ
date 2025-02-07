@@ -25,7 +25,7 @@ public class ReloadSubCommand implements SubCommand {
 
         plugin.reloadConfig();
         plugin.getLanguageManager().reload();
-        LinkManager.updateLinks();
+        plugin.getLinkManager().updateLinks();
         sender.sendMessage(MessageUtils.getAndFormatMsg(
                 true,
                 "reloadMsg",

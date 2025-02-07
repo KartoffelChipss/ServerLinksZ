@@ -30,7 +30,7 @@ public class RemoveSubCommand implements SubCommand {
 
         String id = args[1];
 
-        boolean linkExists = LinkManager.getLinkKeys().contains(id);
+        boolean linkExists = plugin.getLinkManager().getLinkKeys().contains(id);
 
         if (!linkExists) {
             sender.sendMessage(MessageUtils.getAndFormatMsg(
@@ -42,7 +42,7 @@ public class RemoveSubCommand implements SubCommand {
             return false;
         }
 
-        LinkManager.removeLink(id);
+        plugin.getLinkManager().removeLink(id);
         sender.sendMessage(MessageUtils.getAndFormatMsg(
                 true,
                 "removeLinkMsg",

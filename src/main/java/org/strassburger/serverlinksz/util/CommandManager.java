@@ -39,23 +39,23 @@ public class CommandManager {
      * Registers all commands
      */
     public void registerCommands() {
-        registerCommand("serverlinksz", new MainCommandHandler(plugin), new MainTabCompleter());
+        registerCommand("serverlinksz", new MainCommandHandler(plugin), new MainTabCompleter(plugin));
 
-        if (ServerLinksZ.getInstance().getConfig().getBoolean("linkCommand")) {
-            registerCommand("link", new LinkCommand(), new LinkCommand());
+        if (plugin.getConfig().getBoolean("linkCommand")) {
+            registerCommand("link", new LinkCommand(plugin), new LinkCommand(plugin));
         }
 
         for (String linkCommand : defaultLinkCommands) {
-            registerCommand(linkCommand, new LinkCommand(), new LinkCommand());
+            registerCommand(linkCommand, new LinkCommand(plugin), new LinkCommand(plugin));
         }
 
         CommandMap commandMap = getCommandMap();
 
         if (commandMap == null || !plugin.getConfig().getBoolean("dynamicCommands")) return;
 
-        for (String linkKey : LinkManager.getLinkKeys()) {
+        for (String linkKey : plugin.getLinkManager().getLinkKeys()) {
             if (defaultLinkCommands.contains(linkKey)) continue;
-            LinkManager.Link link = LinkManager.getLink(linkKey);
+            LinkManager.Link link = plugin.getLinkManager().getLink(linkKey);
             if (link == null || !link.allowCommand()) continue;
             commandMap.register(linkKey, link.getCommand());
         }

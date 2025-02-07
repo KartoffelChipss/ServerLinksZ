@@ -5,12 +5,18 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.strassburger.serverlinksz.ServerLinksZ;
 import org.strassburger.serverlinksz.util.LinkManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainTabCompleter implements TabCompleter {
+    private final ServerLinksZ plugin;
+
+    public MainTabCompleter(ServerLinksZ plugin) {
+        this.plugin = plugin;
+    }
 
     @Override
     public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, String[] args) {
@@ -48,7 +54,7 @@ public class MainTabCompleter implements TabCompleter {
         }
 
         if (args[0].equals("remove")) {
-            List<String> linkKeys = LinkManager.getLinkKeys().stream().toList();
+            List<String> linkKeys = plugin.getLinkManager().getLinkKeys().stream().toList();
             List<String> suggestions = new ArrayList<>();
             for (String linkKey : linkKeys) {
                 if (linkKey.startsWith(args[1].toLowerCase()) || args[1].equalsIgnoreCase(linkKey)) {

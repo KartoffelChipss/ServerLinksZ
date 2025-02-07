@@ -46,7 +46,7 @@ public class AddSubCommand implements SubCommand {
             return false;
         }
 
-        LinkManager.addLink(id, name, url, allowCommand);
+        plugin.getLinkManager().addLink(id, name, url, allowCommand);
         sender.sendMessage(MessageUtils.getAndFormatMsg(true, "addLinkMsg", "&7Successfully added link with id %id%!", new MessageUtils.Replaceable("%id%", id)));
         if (showHints) {
             sender.sendMessage(MessageUtils.getAndFormatMsg(false, "rejoinHint", "<#E9D502>⚠ To update the Serverlinks, please rejoin the server!"));

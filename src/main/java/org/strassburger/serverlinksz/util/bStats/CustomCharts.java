@@ -1,7 +1,6 @@
 package org.strassburger.serverlinksz.util.bStats;
 
 import org.strassburger.serverlinksz.ServerLinksZ;
-import org.strassburger.serverlinksz.util.LinkManager;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,7 +13,7 @@ public class CustomCharts {
 
     public static Metrics.CustomChart getLinksChart(ServerLinksZ plugin) {
         return new Metrics.AdvancedPie("links", () -> {
-            Set<String> links = LinkManager.getLinkKeys();
+            Set<String> links = plugin.getLinkManager().getLinkKeys();
 
             Map<String, Integer> optionCounts = new HashMap<>();
 
