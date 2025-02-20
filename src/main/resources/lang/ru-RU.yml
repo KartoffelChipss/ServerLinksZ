@@ -12,3 +12,4 @@ removeLinkMsg: "&7Успешно удалена ссылка с id <#00BFFF>%id%
 linkCommandDisabled: "&cКоманда /link выключена!"
 linkCcommandNotAllowed: "&cВы не можете получить доступ к ссылке, используя команду!"
 linkNotFound: "&cСсылка с id %id%&c не найдена!"
+restartServerToRegisterCustomCommands: "<#E9D502>⚠ Пожалуйста, перезапустите сервер для зарегистрации пользовательских команд!"
