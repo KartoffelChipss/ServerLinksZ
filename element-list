@@ -1,0 +1,6 @@
+org.strassburger.serverlinksz
+org.strassburger.serverlinksz.commands
+org.strassburger.serverlinksz.commands.maincommand
+org.strassburger.serverlinksz.commands.maincommand.subcommands
+org.strassburger.serverlinksz.util
+org.strassburger.serverlinksz.util.bStats
