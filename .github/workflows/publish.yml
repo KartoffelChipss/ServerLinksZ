@@ -1,0 +1,88 @@
+name: Publish to Modrinth and GitHub Releases
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.get_version.outputs.version }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+          cache: 'maven'
+
+      - name: Cache Maven repository
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      - name: Get release version
+        id: get_version
+        run: echo "version=${{ github.event.release.tag_name }}" >> $GITHUB_ENV
+
+      - name: Set version from release tag
+        run: mvn -B versions:set -DnewVersion=${{ github.event.release.tag_name }} -DgenerateBackupPoms=false
+
+      - name: Build with Maven
+        run: mvn -B clean package
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ServerLinksZ-jar
+          path: target/ServerLinksZ-${{ github.event.release.tag_name }}.jar
+
+  upload_release_asset:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ServerLinksZ-jar
+          path: target/
+
+      - name: Upload JAR to GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: target/ServerLinksZ-${{ github.event.release.tag_name }}.jar
+          body: ${{ github.event.release.body }}
+
+  publish_modrinth:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ServerLinksZ-jar
+          path: target/
+
+      - name: Publish to Modrinth
+        uses: cloudnode-pro/modrinth-publish@v2
+        with:
+          token: ${{ secrets.MODRINTH_TOKEN }}
+          project: 'iR9qgF1M'
+          version: ${{ github.event.release.tag_name }}
+          name: 'ServerLinksZ ${{ github.event.release.tag_name }}'
+          changelog: ${{ github.event.release.body }}
+          files: '["target/ServerLinksZ-${{ github.event.release.tag_name }}.jar"]'
+          loaders: |-
+            paper
+            purpur
+          game-versions: |-
+            1.21.x
+          status: 'listed'
+          channel: 'release'
