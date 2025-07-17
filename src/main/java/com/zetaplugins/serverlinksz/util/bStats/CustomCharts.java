@@ -1,6 +1,6 @@
-package org.strassburger.serverlinksz.util.bStats;
+package com.zetaplugins.serverlinksz.util.bStats;
 
-import org.strassburger.serverlinksz.ServerLinksZ;
+import com.zetaplugins.serverlinksz.ServerLinksZ;
 
 import java.util.HashMap;
 import java.util.Map;

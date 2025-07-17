@@ -1,9 +1,12 @@
-package org.strassburger.serverlinksz;
+package com.zetaplugins.serverlinksz;
 
+import com.zetaplugins.serverlinksz.util.CommandManager;
+import com.zetaplugins.serverlinksz.util.EventManager;
+import com.zetaplugins.serverlinksz.util.LanguageManager;
+import com.zetaplugins.serverlinksz.util.LinkManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.strassburger.serverlinksz.util.*;
-import org.strassburger.serverlinksz.util.bStats.CustomCharts;
-import org.strassburger.serverlinksz.util.bStats.Metrics;
+import com.zetaplugins.serverlinksz.util.bStats.CustomCharts;
+import com.zetaplugins.serverlinksz.util.bStats.Metrics;
 
 public final class ServerLinksZ extends JavaPlugin {
     private CommandManager commandManager;

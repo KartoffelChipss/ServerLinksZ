@@ -1,8 +1,8 @@
-package org.strassburger.serverlinksz.util;
+package com.zetaplugins.serverlinksz.util;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.strassburger.serverlinksz.ServerLinksZ;
+import com.zetaplugins.serverlinksz.ServerLinksZ;
 
 import java.io.File;
 import java.util.HashMap;

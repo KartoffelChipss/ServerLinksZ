@@ -1,13 +1,13 @@
-package org.strassburger.serverlinksz.commands;
+package com.zetaplugins.serverlinksz.commands;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.jetbrains.annotations.NotNull;
-import org.strassburger.serverlinksz.ServerLinksZ;
-import org.strassburger.serverlinksz.util.LinkManager;
-import org.strassburger.serverlinksz.util.MessageUtils;
+import com.zetaplugins.serverlinksz.ServerLinksZ;
+import com.zetaplugins.serverlinksz.util.LinkManager;
+import com.zetaplugins.serverlinksz.util.MessageUtils;
 
 import java.util.List;
 

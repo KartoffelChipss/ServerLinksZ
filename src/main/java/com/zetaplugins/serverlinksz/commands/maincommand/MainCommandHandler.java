@@ -1,16 +1,16 @@
-package org.strassburger.serverlinksz.commands.maincommand;
+package com.zetaplugins.serverlinksz.commands.maincommand;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
-import org.strassburger.serverlinksz.ServerLinksZ;
-import org.strassburger.serverlinksz.commands.SubCommand;
-import org.strassburger.serverlinksz.commands.maincommand.subcommands.AddSubCommand;
-import org.strassburger.serverlinksz.commands.maincommand.subcommands.HelpSubCommand;
-import org.strassburger.serverlinksz.commands.maincommand.subcommands.ReloadSubCommand;
-import org.strassburger.serverlinksz.commands.maincommand.subcommands.RemoveSubCommand;
-import org.strassburger.serverlinksz.util.MessageUtils;
+import com.zetaplugins.serverlinksz.ServerLinksZ;
+import com.zetaplugins.serverlinksz.commands.SubCommand;
+import com.zetaplugins.serverlinksz.commands.maincommand.subcommands.AddSubCommand;
+import com.zetaplugins.serverlinksz.commands.maincommand.subcommands.HelpSubCommand;
+import com.zetaplugins.serverlinksz.commands.maincommand.subcommands.ReloadSubCommand;
+import com.zetaplugins.serverlinksz.commands.maincommand.subcommands.RemoveSubCommand;
+import com.zetaplugins.serverlinksz.util.MessageUtils;
 
 import java.util.HashMap;
 import java.util.Map;

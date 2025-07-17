@@ -1,8 +1,8 @@
-package org.strassburger.serverlinksz.commands;
+package com.zetaplugins.serverlinksz.commands;
 
 import net.kyori.adventure.text.Component;
 import org.bukkit.command.CommandSender;
-import org.strassburger.serverlinksz.util.MessageUtils;
+import com.zetaplugins.serverlinksz.util.MessageUtils;
 
 public class CommandUtils {
     /**

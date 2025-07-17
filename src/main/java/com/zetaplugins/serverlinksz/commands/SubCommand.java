@@ -1,4 +1,4 @@
-package org.strassburger.serverlinksz.commands;
+package com.zetaplugins.serverlinksz.commands;
 
 import org.bukkit.command.CommandSender;
 

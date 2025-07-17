@@ -1,7 +1,7 @@
-package org.strassburger.serverlinksz.util;
+package com.zetaplugins.serverlinksz.util;
 
 import org.bukkit.event.Listener;
-import org.strassburger.serverlinksz.ServerLinksZ;
+import com.zetaplugins.serverlinksz.ServerLinksZ;
 
 public class EventManager {
     private final ServerLinksZ plugin;

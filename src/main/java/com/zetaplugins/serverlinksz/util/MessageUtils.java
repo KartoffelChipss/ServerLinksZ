@@ -1,8 +1,8 @@
-package org.strassburger.serverlinksz.util;
+package com.zetaplugins.serverlinksz.util;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
-import org.strassburger.serverlinksz.ServerLinksZ;
+import com.zetaplugins.serverlinksz.ServerLinksZ;
 
 import java.util.HashMap;
 import java.util.Map;

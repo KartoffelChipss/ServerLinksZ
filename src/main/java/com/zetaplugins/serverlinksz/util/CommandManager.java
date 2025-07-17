@@ -1,11 +1,11 @@
-package org.strassburger.serverlinksz.util;
+package com.zetaplugins.serverlinksz.util;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.*;
-import org.strassburger.serverlinksz.ServerLinksZ;
-import org.strassburger.serverlinksz.commands.LinkCommand;
-import org.strassburger.serverlinksz.commands.maincommand.MainCommandHandler;
-import org.strassburger.serverlinksz.commands.maincommand.MainTabCompleter;
+import com.zetaplugins.serverlinksz.ServerLinksZ;
+import com.zetaplugins.serverlinksz.commands.LinkCommand;
+import com.zetaplugins.serverlinksz.commands.maincommand.MainCommandHandler;
+import com.zetaplugins.serverlinksz.commands.maincommand.MainTabCompleter;
 
 import java.lang.reflect.Field;
 import java.util.List;

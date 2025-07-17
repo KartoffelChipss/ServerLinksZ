@@ -1,11 +1,10 @@
-package org.strassburger.serverlinksz.commands.maincommand.subcommands;
+package com.zetaplugins.serverlinksz.commands.maincommand.subcommands;
 
 import org.bukkit.command.CommandSender;
-import org.strassburger.serverlinksz.ServerLinksZ;
-import org.strassburger.serverlinksz.commands.CommandUtils;
-import org.strassburger.serverlinksz.commands.SubCommand;
-import org.strassburger.serverlinksz.util.LinkManager;
-import org.strassburger.serverlinksz.util.MessageUtils;
+import com.zetaplugins.serverlinksz.ServerLinksZ;
+import com.zetaplugins.serverlinksz.commands.CommandUtils;
+import com.zetaplugins.serverlinksz.commands.SubCommand;
+import com.zetaplugins.serverlinksz.util.MessageUtils;
 
 import java.net.URI;
 import java.net.URISyntaxException;
