@@ -1,9 +1,9 @@
 name: Deploy Maven Javadocs to GitHub Pages
 
 on:
-  push:
-    branches:
-      - main
+  release:
+    types: [published]
+  workflow_dispatch:
 
 jobs:
   build-and-deploy:
@@ -34,7 +34,6 @@ jobs:
         run: |
           echo "jd.slz.zetaplugins.com" > target/reports/apidocs/CNAME
 
-      # Step 6: Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
